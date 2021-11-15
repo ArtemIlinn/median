@@ -1,0 +1,33 @@
+import random
+
+
+def quickselect(current_list, indx):
+
+    if len(current_list) == 1:
+        assert indx == 0
+        return current_list[0]
+
+    pivot = random.choice(current_list)
+
+    sm = [i for i in current_list if i < pivot]
+    bg = [i for i in current_list if i > pivot]
+    pivots = [i for i in current_list if i == pivot]
+
+    if indx < len(sm):
+        return quickselect(sm, indx)
+
+    elif indx < len(sm) + len(pivots):
+        return pivots[0]
+
+    else:
+        return quickselect(bg, indx - len(sm) - len(pivots))
+
+
+current_list = numbers = list(map(int, input().split()))
+
+
+if len(current_list) % 2 == 1:
+    print(quickselect(current_list, len(current_list) // 2))
+else:
+    print((quickselect(current_list, len(current_list) / 2 - 1) +
+           quickselect(current_list, len(current_list) / 2)) / 2)
